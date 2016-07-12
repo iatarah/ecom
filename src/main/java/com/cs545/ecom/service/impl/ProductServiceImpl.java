@@ -2,6 +2,8 @@ package com.cs545.ecom.service.impl;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,10 @@ public class ProductServiceImpl implements ProductService {
 	public void addNewProduct(Product product) {
 		repository.saveProduct(product);
 		
+	}
+
+	public List<Product> getAllProducts() {
+		return repository.findAllProducts();
 	}
 
 	

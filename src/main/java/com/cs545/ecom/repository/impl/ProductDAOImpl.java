@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.cs545.ecom.repository.impl;
 
 
@@ -29,9 +25,9 @@ public class ProductDAOImpl extends AbstractDAO<Integer, Product> implements Pro
 		
 	}
 
-	public void deleteProductById(String empId) {
-		 Query query = getSession().createSQLQuery("delete from Employee where employee_id=:empId");
-	        query.setString("empId", empId);
+	public void deleteProductById(String pId) {
+		 Query query = getSession().createSQLQuery("delete from Product where productId=:pId");
+	        query.setString("pId", pId);
 	        query.executeUpdate();
 		
 	}
@@ -41,9 +37,9 @@ public class ProductDAOImpl extends AbstractDAO<Integer, Product> implements Pro
 	        return (List<Product>) criteria.list();
 	}
 
-	public Product findProductById(String empId) {
+	public Product findProductById(String pId) {
         Criteria criteria = createEntityCriteria();
-        criteria.add(Restrictions.eq("employeeId", empId));
+        criteria.add(Restrictions.eq("productId", pId));
         return (Product) criteria.uniqueResult();
 	}
 

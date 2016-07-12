@@ -26,18 +26,23 @@ public abstract class AbstractDAO<PK extends Serializable, T>{
     private SessionFactory sessionFactory;
     
     protected Session getSession(){
-        Session session;//= sessionFactory.getCurrentSession();
+    	return (sessionFactory.getCurrentSession()!=null)?sessionFactory.getCurrentSession():sessionFactory.openSession();
+    	// sessionFactory.getCurrentSession();
         //if(session==null)
-        	session=sessionFactory.openSession();
-        return session;
+    	// Session session;
+        //	session=sessionFactory.openSession();
+       // return session;
     }
-    
+    protected void closeSession(Session session){
+    	session.close();
+    }
     public T getByKey(PK key){
         return (T) getSession().get(persistentClass, key);
     }
     
     public void persist(T entity){
-        getSession().persist(entity);
+    	getSession().persist(entity);
+       
     }
     
     public void delete(T entity){
@@ -45,6 +50,9 @@ public abstract class AbstractDAO<PK extends Serializable, T>{
     }
     
     protected Criteria createEntityCriteria(){
-        return getSession().createCriteria(persistentClass);
+ 
+      return getSession().createCriteria(persistentClass);
+    	 
+    
     }
 }
